@@ -1,0 +1,34 @@
+import { test, before, after } from 'node:test'
+import assert from 'node:assert/strict'
+import { createApp } from './http-app.js'
+
+let server
+let baseUrl
+
+// Start the server on a free port before the tests, stop it after.
+before(async () => {
+  server = createApp()
+  await new Promise((resolve) => server.listen(0, resolve))
+  baseUrl = `http://localhost:${server.address().port}`
+})
+
+after(() => server.close())
+
+test('GET / says Hello World', async () => {
+  const res = await fetch(`${baseUrl}/`)
+  assert.equal(res.status, 200)
+  assert.equal(await res.text(), 'Hello World!\n')
+})
+
+test('an unknown path gives 404', async () => {
+  const res = await fetch(`${baseUrl}/nope`)
+  assert.equal(res.status, 404)
+})
+
+test("GET to /json answers with JSON", async () => {
+    const resp = await fetch(`${baseUrl}/json`);
+    const contentType = resp.headers.get("content-type");
+    assert.equal(resp.status, 200);
+    assert.equal(contentType, "application/json");
+    assert.deepEqual(await resp.json(), { message: "Hello World!" });
+})
