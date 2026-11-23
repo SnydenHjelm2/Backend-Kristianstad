@@ -180,7 +180,7 @@ megabytes (MB) as whole numbers:
 - `heapUsed` and `heapTotal`: the memory for your JavaScript objects, used and reserved.
 - `rss`: all memory the process holds, Node.js itself included.
 
-Hint: one method of `process` gives all three at once, in bytes. A megabyte here is 1024 × 1024 bytes. You need the
+Hint: one method of `process` gives all three at once, in bytes. A megabyte here is 1024 * 1024 bytes. You need the
 conversion in the next step too, so write it as a small function `toMb(bytes)`.
 
 <details>

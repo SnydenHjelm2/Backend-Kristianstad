@@ -107,7 +107,7 @@ The tasks are added in `server.js`, not in `app.js`, since the tests use `app.js
 ## 2. The model: tests first
 
 The model gets two new functions, `getTaskList()` for all tasks and `getTask(id)` for one, and you start with their
-tests. Both give a task as an object with an `id`, its number in the list (1, 2, 3 …), since that is what the API
+tests. Both give a task as an object with an `id`, its number in the list (1, 2, 3 ...), since that is what the API
 answers with:
 
 ```json
@@ -155,7 +155,7 @@ Add the two functions last in `src/model/todo.js`, empty for now, so the tests h
 
 ```js
 export function getTaskList() {
-  // 1. Return all tasks as an array of objects { id, task }, where id is the number of the task (1, 2, 3 …)
+  // 1. Return all tasks as an array of objects { id, task }, where id is the number of the task (1, 2, 3 ...)
 }
 
 export function getTask(id) {
@@ -198,7 +198,7 @@ The routes must answer like this:
 
 | Request | Status | Body |
 |---|---|---|
-| `GET /api/tasks` | 200 | `[{ "id": 1, "task": "Wash clothes" }, { "id": 2, "task": "Buy milk" }, …]` |
+| `GET /api/tasks` | 200 | `[{ "id": 1, "task": "Wash clothes" }, { "id": 2, "task": "Buy milk" }, ...]` |
 | `GET /api/tasks/2` | 200 | `{ "id": 2, "task": "Buy milk" }` |
 | `GET /api/tasks/42` | 404 | `{ "error": "Task 42 not found" }` |
 | `GET /api/tasks/abc` | 400 | `{ "error": "The id must be a whole number" }` |

@@ -224,7 +224,7 @@ describe('deleteTask', () => {
 
 - A test runs the code and checks the result with `assert`; `npm test` runs every `*.test.js` file.
 - Use `node:assert/strict`: `equal` for values, `deepEqual` for arrays and objects, `throws` and `rejects` for errors.
-- Hooks (`before`, `beforeEach` …) give every test the same starting point.
+- Hooks (`before`, `beforeEach` ...) give every test the same starting point.
 - `async` and `await` for code that waits; a server is tested on port 0 with `fetch()`.
 - Code that returns values is easier to test than code that prints.
 

@@ -102,6 +102,41 @@ The file has no `export default`, or you import a named export without `{ }`. A 
 `{ }` (`import app from './app.js'`), a named one with (`import { addTask } from './todo.js'`). See
 [ES modules in Node.js](es-modules.md).
 
+## The database
+
+From week 3 your programs connect to MariaDB. The errors below come from the client `mariadb` in the terminal, from a
+Node.js program, or from the tests, which then skip the tests of the database and print the error as the reason. The
+name differs a little: Node.js gives a code such as `ER_ACCESS_DENIED_ERROR` next to the message.
+
+### `ECONNREFUSED` or `Can't connect to server`
+
+No database answers on the port. Is MariaDB running? Start it, see
+[Install MariaDB](mariadb-install.md#start-and-stop-the-server), or `docker compose start` with
+[MariaDB in Docker](mariadb-docker.md), and give it a few seconds. Does it run on another port than `3306`? Put that
+port as `DB_PORT` in `.env`.
+
+### `Access denied for user 'student'@...` (`ER_ACCESS_DENIED_ERROR`)
+
+The user or the password is wrong. The course uses the user `student` with the password `P@ssw0rd`, created in
+[3-05](../exercise/3-05-mariadb.md).
+
+- In the terminal: check the password, with a capital `P` and a zero. If it is right, see the boxes at the end of 3-05.
+- In Node.js: check `.env`. The line is `DB_PASSWORD=P@ssw0rd`, without quotes and without spaces around `=`, and
+  not still `your-password` from `.env.example`.
+- `(using password: NO)`: the password is empty, since the program got no settings. Start it with
+  `--env-file=<path to .env>`, or with the npm script of the exercise, which gives it.
+
+### `Unknown database` (`ER_BAD_DB_ERROR`) or `Table ... doesn't exist`
+
+The database or its tables are missing. The exercise says how to create the database and load its `create.sql`; do
+it again. If a table is still missing, the load stopped at an error: read the first error it printed, fix the line
+in `create.sql`, and load it again.
+
+### `node: .../.env: not found`
+
+The path after `--env-file=` is relative to where you stand. Run the command from the root of your repo, and check
+that you copied `.env.example` to `.env`.
+
 ## Git
 
 ### `git pull` says "Need to specify how to reconcile divergent branches"

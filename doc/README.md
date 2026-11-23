@@ -20,3 +20,10 @@ Articles and reading instructions, added week by week. The exercises link to the
 | Article | What it is about |
 |---|---|
 | [Express 5 in short](express-5.md) | The app and the server, a request through middleware and routes, `req.params`, `req.query`, `req.body`, the answer, a router, `async` routes and the error handler, static files and EJS, testing the app |
+
+## Week 3
+
+| Article | What it is about |
+|---|---|
+| [Install MariaDB](mariadb-install.md) | The server and the client, installing on Windows, macOS and Linux, starting and stopping the server, logging in as root, MySQL instead |
+| [MariaDB in Docker](mariadb-docker.md) | Instead of installing MariaDB: a container with Docker Compose, `compose.yaml`, a terminal in the container |
