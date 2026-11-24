@@ -3,7 +3,15 @@ import os from "node:os";
 
 const router = express.Router();
 
-function memoryInfo() {
+export function defaultInfo() {
+    return {
+        status: "ok", 
+        time: new Date(), 
+        uptime: Math.round(process.uptime())
+    }
+}
+
+export function memoryInfo() {
     return {
         "heapUsedMb": toMb(process.memoryUsage().heapUsed),
         "heapTotalMb": toMb(process.memoryUsage().heapTotal),
@@ -11,7 +19,7 @@ function memoryInfo() {
     }
 }
 
-function nodeInfo() {
+export function nodeInfo() {
     return {
         version: process.version,
         platform: process.platform,
@@ -19,7 +27,7 @@ function nodeInfo() {
     }
 }
 
-function systemInfo() {
+export function systemInfo() {
     return {
         hostname: os.hostname(),
         cpus: os.cpus().length,
@@ -34,11 +42,7 @@ function toMb(b) {
 }
 
 router.get("/", (req, resp) => {
-    let obj = {
-        status: "ok", 
-        time: new Date(), 
-        uptime: Math.round(process.uptime())
-    }
+    let obj = defaultInfo();
 
     if (req.query["details"] === "true") {
         obj.node = nodeInfo();

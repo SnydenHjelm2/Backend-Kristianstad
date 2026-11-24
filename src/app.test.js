@@ -14,10 +14,32 @@ before(async () => {
 
 after(() => server.close());
 
-test("GET / responds with Hello World", async () => {
-    let resp = await fetch(baseURL + "/");
+test('GET / is a web page that says Hello World', async () => {
+    const resp = await fetch(`${baseURL}/`);
     assert.equal(resp.status, 200);
-    assert.equal(await resp.text(), "Hello World\n");
+    assert.match(resp.headers.get('content-type'), /text\/html/);
+    assert.match(await resp.text(), /<h1>Hello World<\/h1>/);
+});
+
+test("GET /hello?name=Ada greets Ada on a web page", async () => {
+    const resp = await fetch(`${baseURL}/hello?name=Ada`);
+    assert.equal(resp.status, 200);
+    assert.match(resp.headers.get('content-type'), /text\/html/);
+    assert.match(await resp.text(), /<h1>Hello Ada<\/h1>/);
+});
+
+test('the name is escaped, so a script is not run', async () => {
+    const name = encodeURIComponent('<script>alert(1)</script>');
+    const resp = await fetch(`${baseURL}/hello?name=${name}`);
+    const html = await resp.text();
+    assert.match(html, /&lt;script&gt;/);
+    assert.doesNotMatch(html, /<script>/);
+});
+
+test("GET /css/style.css has right content-type", async () => {
+    let resp = await fetch(baseURL + "/css/style.css");
+    assert.equal(resp.status, 200);
+    assert.equal(resp.headers.get("content-type").split(";")[0], "text/css");
 });
 
 test("GET /api/hello responds with JSON", async () => {

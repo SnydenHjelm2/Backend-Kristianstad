@@ -1,0 +1,18 @@
+<%- include('partials/header', { title }) %>
+
+<ul>
+    <% for (let key in data) { %>
+        <% if (typeof data[key] === "object") { %>
+            <li><%= key %></li>
+            <ul>
+                <% for (let innerKey in data[key]) { %>
+                    <li><%= innerKey %>: <%= data[key][innerKey] %></li>
+                <% } %>
+            </ul>
+        <% } else { %>
+            <li><%= key %>: <%= data[key] %></li>
+        <% } %>
+    <% } %>
+</ul>
+
+<%- include('partials/footer') %>
