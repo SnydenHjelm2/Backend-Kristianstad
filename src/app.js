@@ -2,6 +2,7 @@ import express from "express";
 import apiRouter from "./route/api.js";
 import healthRouter from "./route/health.js";
 import pageRouter from "./route/page.js";
+import tasksRouter from "./route/tasks.js";
 import path from "node:path";
 
 const app = express();
@@ -19,6 +20,8 @@ app.use((req, res, next) => {
 app.use("/", pageRouter);
 
 app.use("/api", apiRouter);
+
+app.use("/api/tasks", tasksRouter);
 
 app.use("/api/health", healthRouter);
 
