@@ -2,9 +2,6 @@
 
 My repo for the course. It started as a copy of the course template; this README is mine to change.
 
-The week plan (what to prepare, the Friday agenda, deadlines) is in Canvas. Start with
-[1-05 Lab environment](exercise/1-05-lab-environment.md), then [1-10 Get ready](exercise/1-10-get-ready.md).
-
 | Directory | Contents |
 |---|---|
 | [`exercise/`](exercise/README.md) | The exercises, week by week, updated from the template |
